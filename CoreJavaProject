@@ -1,0 +1,131 @@
+package CoreJProject;
+
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.util.Scanner;
+
+public class Project 
+{
+	String txt,txt2,ans,ans2;
+	Scanner sc=new Scanner(System.in);
+	public void Task() throws Exception
+	{
+		
+		FileReader fr=new FileReader("D:\\other\\projText.txt");
+		
+		System.out.println("**Welcome are you Teacher or a Student**");
+		System.out.println("1)  Teacher");
+		System.out.println("2)  Student");
+		System.out.println("=====================");
+		System.out.println("Enter Your Choice: ");
+		int k=sc.nextInt();
+		switch(k)
+		{
+			case 1:
+				System.out.println("=================================");
+				System.out.println("Enter Your Username: ");
+				String tuname=sc.next();
+				System.out.println("Enter Your Password: ");
+				String tpwd=sc.next();
+				if(tuname.equals("admin") && tpwd.equals("Admin@1234"))
+				{
+					System.out.println("\t\tLogin Success");
+					System.out.println("==============================");
+					System.out.println("Do You want to see Student Question Answer?");
+					this.ans=sc.next();
+					if(ans.equals("y") || ans.equals("Y") || ans.equals("yes") || ans.equals("Yes") || ans.equals("YES"))
+					{
+						this.showData();
+						this.questionMethod();
+					}	
+					else
+						this.questionMethod();
+				}
+				else
+				{
+					System.out.println("Invalid Credentials");
+				}
+				
+				break;
+				
+			case 2:
+				System.out.println("Enter Your Username: ");
+				String suname=sc.next();
+				System.out.println("Enter Your Password: ");
+				String spwd=sc.next();
+				if(suname.equals("Akshay") && spwd.equals("8459031379"))
+				{
+					System.out.println("Login Success!!!");
+					System.out.println("==========================");
+					System.out.print("Question is :  ");
+					int i;
+					while((i=fr.read())!=-1)
+					{
+						System.out.print((char)i);
+					}
+					this.answerMethod();
+				}
+				else
+				{
+					System.out.println("Invalid Credentials!!!");
+				}
+				break;
+				
+			
+		}
+	}
+	
+	void questionMethod() throws Exception
+	{
+		FileWriter fw=new FileWriter("D:\\other\\projText.txt");
+		System.out.println();
+		System.out.println("==================================");
+		System.out.println("Do you want to add Question?");
+		this.ans2=sc.next();
+		if(ans2.equals("y") || ans2.equals("Y") || ans2.equals("yes") || ans2.equals("Yes") || ans2.equals("YES"))
+		{
+			System.out.println("Please Enter Your Question: ");
+			sc.nextLine();
+			this.txt=sc.nextLine();
+			fw.write(this.txt);
+			System.out.println("Successfully Entered Question in the file");
+		}
+		else
+		{
+			System.out.println("Ok Fine...Have a Good Day!!!");
+		}
+		fw.close();
+	}
+	
+	void answerMethod() throws Exception
+	{
+		FileWriter fw2=new FileWriter("D:\\other\\projText2.txt");
+		System.out.println();
+		System.out.print("Ans: ");
+		sc.nextLine();
+		this.txt2=sc.nextLine();
+		fw2.write(this.txt2);
+		System.out.println("Successfully Submited Your answer in the file!!!");
+		fw2.close();
+	}
+	void showData() throws Exception
+	{
+		FileReader fr=new FileReader("D:\\other\\projText.txt");
+		FileReader fr2=new FileReader("D:\\other\\projText2.txt");
+		int i;
+		while((i=fr.read())!=-1)
+		{
+			System.out.print((char)i);
+		}
+		System.out.println();
+		while((i=fr2.read())!=-1)
+		{
+			System.out.print((char)i);
+		}
+	}
+	public static void main(String[] args) throws Exception
+	{
+		new Project().Task();
+	}
+
+}
